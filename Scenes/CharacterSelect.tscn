@@ -164,12 +164,12 @@ script = ExtResource("2_hnwe0")
 [node name="KingHider" type="Polygon2D" parent="."]
 position = Vector2(152, -144)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-192, -64, 96, -64, 96, 192, -192, 192)
+polygon = PackedVector2Array(-56, -64, -8, -64, -8, 192, -56, 192)
 metadata/_edit_group_ = true
 
 [node name="StaticPolygon2D" type="Polygon2D" parent="KingHider"]
 modulate = Color(1, 0.5, 0.5, 0.3)
-polygon = PackedVector2Array(-192, -64, 96, -64, 96, 192, -192, 192)
+polygon = PackedVector2Array(-56, -64, -8, -64, -8, 192, -56, 192)
 script = ExtResource("2_hnwe0")
 
 [node name="incomplete" type="Polygon2D" parent="."]

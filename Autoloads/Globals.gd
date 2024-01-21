@@ -4,7 +4,7 @@ var room_completed: Dictionary = {
 	"wizard": false,
 	"healer": false,
 	"knight": false,
-	"king"  : false,
+	"king"  : true,
 }
 
 var room_survived: Dictionary = {
