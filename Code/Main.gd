@@ -3,6 +3,19 @@ extends MarginContainer
 @export var button_node: BoxContainer
 
 func _ready():
+	Global.room_completed = {
+	"wizard": false,
+	"healer": false,
+	"knight": false,
+	"king"  : true,
+	}
+
+	Global.room_survived = {
+	"wizard": true,
+	"healer": true,
+	"knight": true,
+	"king"  : true,
+	}
 	SceneManager.scale_screen(1)
 	for button in button_node.get_children():
 		# print(button)

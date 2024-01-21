@@ -15,7 +15,7 @@ fill_from = Vector2(0.5, 0.5)
 offsets = PackedFloat32Array(0, 0.1, 1)
 colors = PackedColorArray(0.207207, 0.207207, 0.207207, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cqite"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x2ocu"]
 gradient = SubResource("Gradient_w8t1h")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mdnj0"]
@@ -32,7 +32,7 @@ orbit_velocity_max = 0.0
 linear_accel_min = 100.0
 linear_accel_max = 100.0
 color = Color(0.960784, 0.960784, 0.960784, 1)
-color_ramp = SubResource("GradientTexture1D_cqite")
+color_ramp = SubResource("GradientTexture1D_x2ocu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmxsm"]
 radius = 2.0
