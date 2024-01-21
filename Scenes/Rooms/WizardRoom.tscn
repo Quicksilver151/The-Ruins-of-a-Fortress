@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3rqwarderigj"]
+
+[ext_resource type="PackedScene" uid="uid://ggb338ow7xr2" path="res://Objects/tiles.tscn" id="1_0kswp"]
+[ext_resource type="PackedScene" uid="uid://bwubt56wnkj06" path="res://Objects/Soul.tscn" id="2_i7hlr"]
+[ext_resource type="Script" path="res://Code/Classes/StaticPolygon2D.gd" id="3_jnsfi"]
+[ext_resource type="PackedScene" uid="uid://d2d7t1awtgum" path="res://Objects/WeaponItem.tscn" id="4_flart"]
+[ext_resource type="Script" path="res://Code/Classes/LevelChangeArea2D.gd" id="5_1uy3c"]
+[ext_resource type="PackedScene" uid="uid://bx4h2knxtwkch" path="res://Objects/LightParticles.tscn" id="5_y0h1j"]
+
+[sub_resource type="GDScript" id="GDScript_y568e"]
+script/source = "extends Node2D
+
+func _ready():
+	Global.room_completed.wizard = true
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3e4l1"]
+radius = 16.0
+
+[node name="WizardRoom" type="Node2D"]
+position = Vector2(-1, 0)
+script = SubResource("GDScript_y568e")
+
+[node name="tiles" parent="." instance=ExtResource("1_0kswp")]
+layer_0/tile_data = PackedInt32Array(-65539, 327680, 0, -3, 327680, 0, 65533, 327680, 0, 131069, 327680, 0, -65538, 327680, 0, -2, 327680, 0, 65534, 327680, 0, 131070, 327680, 0, -65537, 327680, 0, -1, 327680, 0, 65535, 327680, 0, 131071, 327680, 0, -131072, 327680, 0, -65536, 327680, 0, 0, 327680, 0, 65536, 327680, 0, 65528, 327680, 0, 131064, 327680, 0, 196600, 327680, 0, 65529, 327680, 0, 131065, 327680, 0, 196601, 327680, 0, 65530, 327680, 0, 131066, 327680, 0, 196602, 327680, 0, 65531, 327680, 0, 131067, 327680, 0, 196603, 327680, 0, 65532, 327680, 0, 131068, 327680, 0, 196604, 327680, 0, 65525, 327680, 0, 131061, 327680, 0, 196597, 327680, 0, 262133, 327680, 0, 327669, 327680, 0, 65526, 327680, 0, 131062, 327680, 0, 196598, 327680, 0, 262134, 327680, 0, 327670, 327680, 0, 65527, 327680, 0, 131063, 327680, 0, 196599, 327680, 0, 262135, 327680, 0, 262136, 327680, 0, 262137, 327680, 0, 327673, 327680, 0, 262138, 327680, 0, 327674, 327680, 0, 262139, 327680, 0, 327675, 327680, 0, 393211, 327680, 0, 262140, 327680, 0, 327676, 327680, 0, 393212, 327680, 0, 196605, 327680, 0, 262141, 327680, 0, 327677, 327680, 0, 393213, 327680, 0, -65540, 327680, 0, -4, 327680, 0, 65522, 327680, 0, 131058, 327680, 0, 196594, 327680, 0, 262130, 327680, 0, 327666, 327680, 0, 65523, 327680, 0, 131059, 327680, 0, 196595, 327680, 0, 262131, 327680, 0, 327667, 327680, 0, 65524, 327680, 0, 131060, 327680, 0, 196596, 327680, 0, 262132, 327680, 0, 327668, 327680, 0, 327671, 327680, 0, -65548, 0, 0, -12, 0, 0, -65547, 0, 0, -11, 0, 0, -65546, 0, 0, -10, 0, 0, -65545, 0, 0, -9, 0, 0, -65544, 0, 0, -8, 0, 0, -65543, 0, 0, -7, 0, 0, -65542, 0, 0, -6, 0, 0, -65541, 0, 0, -5, 0, 0, -196622, 0, 0, -131086, 0, 0, -196621, 0, 0, -131085, 0, 0, -196620, 0, 0, -131084, 0, 0, -196619, 0, 0, -131083, 0, 0, -196618, 0, 0, -131082, 0, 0, -196617, 0, 0, -131081, 0, 0, -196616, 0, 0, -131080, 0, 0, -196615, 0, 0, -131079, 0, 0, -196614, 0, 0, -131078, 0, 0, -196613, 0, 0, -131077, 0, 0, -196612, 0, 0, -131076, 0, 0, -196611, 0, 0, -131075, 0, 0, -196610, 0, 0, -131074, 0, 0, -196609, 0, 0, -131073, 0, 0, -262144, 0, 0, -196608, 0, 0, 327672, 327680, 0, -15, 0, 0, -65551, 0, 0, -131087, 0, 0, -196623, 0, 0, 65521, 327680, 0, 131057, 327680, 0, 196593, 327680, 0, 262129, 327680, 0, 327665, 327680, 0, -13, 0, 0, -65549, 0, 0, -65550, 131072, 0, -14, 131072, 0)
+layer_1/tile_data = PackedInt32Array(-131076, 262146, 0, -65540, 262146, 1, -131075, 327682, 0, -65539, 327682, 1, -131074, 131074, 0, -65538, 131074, 1, -131073, 196610, 0, -65537, 196610, 1, -131072, 65538, 0, -65536, 65538, 1, -65542, 393218, 0, -65545, 393218, 0, -65548, 393218, 0, 65530, 589826, 65536, 65529, 589826, 0, 131065, 524290, 1, 65521, 589826, 131072, 131057, 589826, 196608, -65550, 2, 0, -14, 2, 1)
+layer_2/tile_data = PackedInt32Array(262129, 393218, 1, 327665, 458754, 0, 262130, 393218, 1, 327666, 458754, 0, 327668, 393218, 0, 327671, 393218, 0, 327674, 393218, 0, 327675, 589826, 1, 393211, 589826, 0, 393212, 589826, 65536, 327677, 589826, 1, 393213, 524290, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_i7hlr")]
+position = Vector2(-13, 9)
+
+[node name="StaticPolygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 0.5, 0.5, 0.3)
+polygon = PackedVector2Array(-224, 0, -224, -32, -208, -32, -208, 0, -112, 0, -112, 32, -96, 32, -96, 16, -80, 16, -80, 0, -64, 0, -64, -16, 0, -16, 0, 0, 16, 0, 16, -64, -240, -64, -240, 0)
+script = ExtResource("3_jnsfi")
+
+[node name="StaticPolygon2D2" type="Polygon2D" parent="."]
+modulate = Color(1, 0.5, 0.5, 0.3)
+polygon = PackedVector2Array(16, -64, 16, 32, -32, 32, -32, 64, -48, 64, -48, 80, -64, 80, -64, 64, -80, 64, -80, 80, -240, 80, -240, 32, -232, 32, -232, 0, -240, -0.754528, -240, -64, -256, -64, -256, 128, 32, 128, 32, -64)
+script = ExtResource("3_jnsfi")
+
+[node name="WeaponItem" parent="." instance=ExtResource("4_flart")]
+position = Vector2(-232, 16)
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(-222, 16)
+script = ExtResource("5_1uy3c")
+scene_name = "BattleRooms/WizardBattleRoom"
+fade_to_white = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("CircleShape2D_3e4l1")
+
+[node name="LightParticles" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-230, 52)
+
+[node name="LightParticles2" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-234, 52)
+
+[node name="LightParticles3" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-218, 52)
+
+[node name="LightParticles4" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-214, 52)
+
+[node name="LightParticles5" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-88, 71)
+
+[node name="LightParticles6" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-184, 71)
+
+[node name="LightParticles7" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-136, 71)
+
+[node name="LightParticles8" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-184, -25)
+
+[node name="LightParticles9" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-136, -25)
+
+[node name="LightParticles10" parent="." instance=ExtResource("5_y0h1j")]
+position = Vector2(-88, -25)

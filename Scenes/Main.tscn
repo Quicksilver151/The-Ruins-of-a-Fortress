@@ -1,0 +1,138 @@
+[gd_scene load_steps=13 format=3 uid="uid://bet8dvnagxuh1"]
+
+[ext_resource type="Script" path="res://Code/Main.gd" id="1_5x7bm"]
+[ext_resource type="Texture2D" uid="uid://esqywxlxqj8f" path="res://Assets/Sprites/logos.png" id="1_ajgo4"]
+[ext_resource type="Texture2D" uid="uid://l4gk6sodesep" path="res://Assets/Sprites/wall_normal.png" id="1_dgxxb"]
+[ext_resource type="FontFile" uid="uid://b2vy8b2brmls5" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_fy0ic"]
+[ext_resource type="AudioStream" uid="uid://oe8v315a0ipe" path="res://Assets/Audio/fortress.ogg" id="5_ld22l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_673yd"]
+outline_size = 4
+outline_color = Color(0.72549, 0.72549, 0.72549, 1)
+
+[sub_resource type="Theme" id="Theme_7arnm"]
+default_font = ExtResource("2_fy0ic")
+default_font_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5o87"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7yv7c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_78jy2"]
+font_size = 8
+
+[sub_resource type="GDScript" id="GDScript_7ul51"]
+script/source = "extends Sprite2D
+
+func _physics_process(delta):
+	position = get_global_mouse_position()
+	$Label.text = str(position)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_jo84c"]
+font = ExtResource("2_fy0ic")
+font_size = 14
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="MarginContainer" node_paths=PackedStringArray("button_node")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5x7bm")
+button_node = NodePath("VBoxContainer/Buttons")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_dgxxb")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "The Ruins of a Fortress"
+label_settings = SubResource("LabelSettings_673yd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = SubResource("Theme_7arnm")
+
+[node name="Play" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_focus_color = Color(0.247059, 0.247059, 0.247059, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.819608, 0.819608, 0.819608, 1)
+theme_override_constants/outline_size = 4
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o5o87")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7yv7c")
+text = "Play"
+flat = true
+
+[node name="About" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_focus_color = Color(0.247059, 0.247059, 0.247059, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.819608, 0.819608, 0.819608, 1)
+theme_override_constants/outline_size = 4
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o5o87")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7yv7c")
+text = "About"
+flat = true
+
+[node name="Quit" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.301961, 0.301961, 0.301961, 1)
+theme_override_colors/font_focus_color = Color(0.247059, 0.247059, 0.247059, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.819608, 0.819608, 0.819608, 1)
+theme_override_constants/outline_size = 4
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o5o87")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7yv7c")
+text = "Quit"
+flat = true
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = " V0.1.0"
+label_settings = SubResource("LabelSettings_78jy2")
+vertical_alignment = 2
+
+[node name="Logos" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(48, 40)
+texture = ExtResource("1_ajgo4")
+script = SubResource("GDScript_7ul51")
+
+[node name="Label" type="Label" parent="Logos"]
+offset_left = -16.0
+offset_right = 52.0
+offset_bottom = 23.0
+text = "awdawd13241342"
+label_settings = SubResource("LabelSettings_jo84c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ld22l")
+volume_db = 10.0
+autoplay = true

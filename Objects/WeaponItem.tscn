@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2d7t1awtgum"]
+
+[ext_resource type="Texture2D" uid="uid://d132yjh3rpfj0" path="res://Assets/Sprites/Weapons.png" id="1_f51p8"]
+
+[sub_resource type="Gradient" id="Gradient_w7ueu"]
+offsets = PackedFloat32Array(0.563636, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.584314, 0.584314, 0.584314, 0.0745098)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vuvyv"]
+gradient = SubResource("Gradient_w7ueu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j8si4"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_vuvyv")
+
+[node name="WeaponItem" type="Sprite2D"]
+z_index = 2
+texture = ExtResource("1_f51p8")
+hframes = 4
+
+[node name="CPUParticles2D" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_j8si4")

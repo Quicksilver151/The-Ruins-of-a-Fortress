@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmn2hmo8riak7"]
+
+[ext_resource type="Script" path="res://Code/Enemy.gd" id="1_i27v0"]
+[ext_resource type="Texture2D" uid="uid://cha6b4m7gu84a" path="res://Assets/Sprites/Mob.png" id="1_whn3g"]
+[ext_resource type="Texture2D" uid="uid://toe0utu27p0v" path="res://Assets/Sprites/UnpoweredWeapons.png" id="2_7solt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uymom"]
+radius = 7.9
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+z_index = 1
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_i27v0")
+sprite = NodePath("Sprite")
+metadata/_edit_group_ = true
+
+[node name="LHWeapon" type="Sprite2D" parent="."]
+position = Vector2(-10, -18)
+rotation = -0.261799
+texture = ExtResource("2_7solt")
+hframes = 4
+frame = 1
+
+[node name="RHWeapon" type="Sprite2D" parent="."]
+position = Vector2(10, -18)
+rotation = 0.261799
+texture = ExtResource("2_7solt")
+hframes = 4
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_uymom")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_whn3g")
+hframes = 3

@@ -1,0 +1,188 @@
+[gd_scene load_steps=10 format=3 uid="uid://ciudx7x7uahgb"]
+
+[ext_resource type="PackedScene" uid="uid://ggb338ow7xr2" path="res://Objects/tiles.tscn" id="1_geit1"]
+[ext_resource type="PackedScene" uid="uid://bwubt56wnkj06" path="res://Objects/Soul.tscn" id="2_ckhac"]
+[ext_resource type="Script" path="res://Code/Classes/StaticPolygon2D.gd" id="3_kvina"]
+[ext_resource type="PackedScene" uid="uid://d2d7t1awtgum" path="res://Objects/WeaponItem.tscn" id="4_agfx3"]
+[ext_resource type="Script" path="res://Code/Classes/LevelChangeArea2D.gd" id="5_8h5tj"]
+[ext_resource type="PackedScene" uid="uid://bx4h2knxtwkch" path="res://Objects/LightParticles.tscn" id="5_a7frv"]
+[ext_resource type="Texture2D" uid="uid://toe0utu27p0v" path="res://Assets/Sprites/UnpoweredWeapons.png" id="6_rr1f2"]
+
+[sub_resource type="GDScript" id="GDScript_er7ej"]
+script/source = "extends Node2D
+
+func _ready():
+	Global.room_completed.knight = true
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3e4l1"]
+radius = 16.0
+
+[node name="KnightRoom" type="Node2D"]
+script = SubResource("GDScript_er7ej")
+
+[node name="tiles" parent="." instance=ExtResource("1_geit1")]
+layer_0/tile_data = PackedInt32Array(65535, 327680, 0, 131071, 327680, 0, 196607, 327680, 0, 262143, 327680, 0, 327679, 327680, 0, 393215, 327680, 0, 458751, 327680, 0, 0, 327680, 0, 65536, 327680, 0, 131072, 327680, 0, 196608, 327680, 0, 262144, 327680, 0, 327680, 327680, 0, 393216, 327680, 0, 1, 327680, 0, 65537, 327680, 0, 131073, 327680, 0, 196609, 327680, 0, 262145, 327680, 0, 327681, 327680, 0, 393217, 327680, 0, 2, 327680, 0, 65538, 327680, 0, 131074, 327680, 0, 196610, 327680, 0, 262146, 327680, 0, 327682, 327680, 0, 393218, 327680, 0, 3, 327680, 0, 65539, 327680, 0, 131075, 327680, 0, 196611, 327680, 0, 262147, 327680, 0, 327683, 327680, 0, 393219, 327680, 0, 4, 327680, 0, 65540, 327680, 0, 131076, 327680, 0, 196612, 327680, 0, 262148, 327680, 0, 327684, 327680, 0, 393220, 327680, 0, 5, 327680, 0, 65541, 327680, 0, 131077, 327680, 0, 196613, 327680, 0, 262149, 327680, 0, 327685, 327680, 0, 393221, 327680, 0, 6, 327680, 0, 65542, 327680, 0, 131078, 327680, 0, 196614, 327680, 0, 262150, 327680, 0, 327686, 327680, 0, 393222, 327680, 0, 7, 327680, 0, 65543, 327680, 0, 131079, 327680, 0, 196615, 327680, 0, 262151, 327680, 0, 327687, 327680, 0, 393223, 327680, 0, 8, 327680, 0, 65544, 327680, 0, 131080, 327680, 0, 196616, 327680, 0, 262152, 327680, 0, 327688, 327680, 0, 393224, 327680, 0, 9, 327680, 0, 65545, 327680, 0, 131081, 327680, 0, 196617, 327680, 0, 262153, 327680, 0, 327689, 327680, 0, 393225, 327680, 0, 10, 327680, 0, 65546, 327680, 0, 131082, 327680, 0, 196618, 327680, 0, 262154, 327680, 0, 327690, 327680, 0, 393226, 327680, 0, 11, 327680, 0, 65547, 327680, 0, 131083, 327680, 0, 196619, 327680, 0, 262155, 327680, 0, 327691, 327680, 0, 393227, 327680, 0, 12, 327680, 0, 65548, 327680, 0, 131084, 327680, 0, 196620, 327680, 0, 262156, 327680, 0, 327692, 327680, 0, 393228, 327680, 0, 13, 327680, 0, 65549, 327680, 0, 131085, 327680, 0, 196621, 327680, 0, 262157, 327680, 0, 327693, 327680, 0, 393229, 327680, 0, 14, 327680, 0, 65550, 327680, 0, 131086, 327680, 0, 196622, 327680, 0, 262158, 327680, 0, 327694, 327680, 0, 393230, 327680, 0, 15, 327680, 0, 65551, 327680, 0, 131087, 327680, 0, 196623, 327680, 0, 262159, 327680, 0, 327695, 327680, 0, 393231, 327680, 0, 16, 327680, 0, 65552, 327680, 0, 131088, 327680, 0, 196624, 327680, 0, 262160, 327680, 0, 327696, 327680, 0, 393232, 327680, 0, 17, 327680, 0, 65553, 327680, 0, 131089, 327680, 0, 196625, 327680, 0, 262161, 327680, 0, 327697, 327680, 0, 393233, 327680, 0, 18, 327680, 0, 65554, 327680, 0, 131090, 327680, 0, 196626, 327680, 0, 262162, 327680, 0, 327698, 327680, 0, 393234, 327680, 0, 19, 327680, 0, 65555, 327680, 0, 131091, 327680, 0, 196627, 327680, 0, 262163, 327680, 0, 327699, 327680, 0, 393235, 327680, 0, 20, 327680, 0, 65556, 327680, 0, 131092, 327680, 0, 196628, 327680, 0, 262164, 327680, 0, 327700, 327680, 0, 393236, 327680, 0, 21, 327680, 0, 65557, 327680, 0, 131093, 327680, 0, 196629, 327680, 0, 262165, 327680, 0, 327701, 327680, 0, 393237, 327680, 0, 22, 327680, 0, 65558, 327680, 0, 131094, 327680, 0, 196630, 327680, 0, 262166, 327680, 0, 327702, 327680, 0, 393238, 327680, 0, -131053, 0, 0, -262145, 0, 0, -196609, 0, 0, -131073, 0, 0, -65537, 0, 0, -1, 0, 0, -327680, 0, 0, -262144, 0, 0, -196608, 0, 0, -131072, 0, 0, -65536, 0, 0, -327679, 0, 0, -262143, 0, 0, -196607, 0, 0, -131071, 0, 0, -65535, 0, 0, -327678, 0, 0, -262142, 0, 0, -196606, 0, 0, -131070, 0, 0, -65534, 0, 0, -327677, 0, 0, -262141, 0, 0, -196605, 0, 0, -131069, 0, 0, -65533, 0, 0, -327676, 0, 0, -262140, 0, 0, -196604, 0, 0, -131068, 0, 0, -65532, 0, 0, -327675, 0, 0, -262139, 0, 0, -196603, 0, 0, -131067, 0, 0, -65531, 0, 0, -327674, 0, 0, -262138, 0, 0, -196602, 0, 0, -131066, 0, 0, -65530, 0, 0, -327673, 0, 0, -262137, 0, 0, -196601, 0, 0, -131065, 0, 0, -65529, 0, 0, -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131064, 0, 0, -65528, 0, 0, -327671, 0, 0, -262135, 0, 0, -196599, 0, 0, -131063, 0, 0, -65527, 0, 0, -327670, 0, 0, -262134, 0, 0, -196598, 0, 0, -131062, 0, 0, -65526, 0, 0, -327669, 0, 0, -262133, 0, 0, -196597, 0, 0, -131061, 0, 0, -65525, 0, 0, -327668, 0, 0, -262132, 0, 0, -196596, 0, 0, -131060, 0, 0, -65524, 0, 0, -327667, 0, 0, -262131, 0, 0, -196595, 0, 0, -131059, 0, 0, -65523, 0, 0, -327666, 0, 0, -262130, 0, 0, -196594, 0, 0, -131058, 0, 0, -65522, 0, 0, -327665, 0, 0, -262129, 0, 0, -196593, 0, 0, -131057, 0, 0, -65521, 0, 0, -327664, 0, 0, -262128, 0, 0, -196592, 0, 0, -131056, 0, 0, -65520, 0, 0, -327663, 0, 0, -262127, 0, 0, -196591, 0, 0, -131055, 0, 0, -65519, 0, 0, -327662, 0, 0, -262126, 0, 0, -196590, 0, 0, -131054, 0, 0, -65518, 0, 0, -327661, 0, 0, -262125, 0, 0, -196589, 0, 0, -65517, 0, 0, -327660, 0, 0, -262124, 0, 0, -196588, 0, 0, -131052, 0, 0, -65516, 0, 0, -327659, 0, 0, -262123, 0, 0, -196587, 0, 0, -131051, 0, 0, -65515, 0, 0, -327658, 0, 0, -262122, 0, 0, -196586, 0, 0, -131050, 0, 0, -65514, 0, 0, -327657, 0, 0, -262121, 0, 0, -196585, 0, 0, -131049, 0, 0, -65513, 0, 0, -327656, 0, 0, -262120, 0, 0, -196584, 0, 0, -131048, 0, 0, -65512, 0, 0, -327655, 0, 0, -262119, 0, 0, -196583, 0, 0, -131047, 0, 0, -65511, 0, 0, -327654, 0, 0, -262118, 0, 0, -196582, 0, 0, -131046, 0, 0, -65510, 0, 0, -327653, 0, 0, -262117, 0, 0, -196581, 0, 0, -131045, 0, 0, -65509, 0, 0, 23, 327680, 0, 65559, 327680, 0, 131095, 327680, 0, 196631, 327680, 0, 262167, 327680, 0, 327703, 327680, 0, 393239, 327680, 0, 24, 327680, 0, 65560, 327680, 0, 131096, 327680, 0, 196632, 327680, 0, 262168, 327680, 0, 327704, 327680, 0, 393240, 327680, 0, 25, 327680, 0, 65561, 327680, 0, 131097, 327680, 0, 196633, 327680, 0, 262169, 327680, 0, 327705, 327680, 0, 393241, 327680, 0, 26, 327680, 0, 65562, 327680, 0, 131098, 327680, 0, 196634, 327680, 0, 262170, 327680, 0, 327706, 327680, 0, 393242, 327680, 0, 27, 327680, 0, 65563, 327680, 0, 131099, 327680, 0, 196635, 327680, 0, 262171, 327680, 0, 327707, 327680, 0, 393243, 327680, 0)
+layer_1/tile_data = PackedInt32Array(-131050, 393218, 0, -131053, 393218, 0, -131056, 393218, 0, -131059, 393218, 0, -131068, 393218, 0, -131071, 393218, 0, -65530, 262146, 0, -65529, 327682, 0, -65528, 262146, 0, -65527, 327682, 0, -65526, 262146, 0, -65525, 327682, 0, 10, 262146, 1, 11, 327682, 1, 8, 262146, 1, 9, 327682, 1, 6, 262146, 1, 7, 327682, 1, -131062, 393218, 0, -131065, 393218, 0, -65518, 131074, 0, 18, 131074, 1, -65517, 196610, 0, 19, 196610, 1, -65516, 262146, 0, 20, 262146, 1, -65515, 327682, 0, 21, 327682, 1, -65514, 262146, 0, 22, 262146, 1, -65513, 327682, 0, 23, 327682, 1, 12, 524290, 0, 65548, 524290, 1, 13, 589826, 0, 65549, 524290, 1, 14, 589826, 65536, 65550, 524290, 1, 15, 589826, 0, 65551, 524290, 1, 16, 589826, 65536, 65552, 524290, 1, 17, 524290, 0, 65553, 524290, 1, 393228, 524290, 0, 393229, 589826, 0, 393230, 589826, 65536, 393231, 589826, 0, 393232, 589826, 65536, 393233, 524290, 0, 327692, 589826, 1, 327693, 589826, 1, 327694, 589826, 1, 327695, 589826, 1, 327696, 589826, 1, 327697, 589826, 1, 65535, 65538, 0, 131071, 65538, 1, 196607, 458754, 0, 262143, 458754, 0, 327679, 458754, 0, 393215, 458754, 0, 458751, 458754, 0, -131047, 2, 0, -65511, 2, 1, -131058, 655362, 0, -131057, 655362, 0, -131070, 655362, 0, -131069, 655362, 0, 25, 655362, 1)
+layer_2/tile_data = PackedInt32Array(393223, 393218, 0, 393226, 393218, 0, 393220, 393218, 0, 393217, 393218, 0, 393235, 393218, 0, 393238, 393218, 0, 393229, 393218, 0, 393232, 393218, 0, 393241, 393218, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_ckhac")]
+position = Vector2(27, 33)
+
+[node name="StaticPolygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 0.5, 0.5, 0.3)
+polygon = PackedVector2Array(0, 0, 0, 32, -16, 32, -16, -80, 448, -80, 448, 0, 416, 0, 416, -16, 400, -16, 400, 0, 384, 0, 384, 16, 288, 16, 288, 32, 192, 32, 192, 16, 96, 16, 96, 0)
+script = ExtResource("3_kvina")
+
+[node name="StaticPolygon2D2" type="Polygon2D" parent="."]
+modulate = Color(1, 0.5, 0.5, 0.3)
+polygon = PackedVector2Array(-16, 112, 192, 112, 192, 80, 288, 80, 288, 112, 448, 112, 448, -32, 464, -32, 464, 128, -32, 128, -32, -32, -16, -32)
+script = ExtResource("3_kvina")
+
+[node name="WeaponItem" parent="." instance=ExtResource("4_agfx3")]
+position = Vector2(432, 0)
+frame = 2
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(424, 8)
+script = ExtResource("5_8h5tj")
+scene_name = "BattleRooms/KnightBattleRoom"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("CircleShape2D_3e4l1")
+
+[node name="WeaponPile" type="Node" parent="."]
+
+[node name="Weapons1" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(56, -8)
+rotation = -0.785397
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons2" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(56, -1.90735e-06)
+rotation = -1.0472
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 2
+
+[node name="Weapons3" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(56, 9.53674e-07)
+rotation = 1.309
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 2
+
+[node name="Weapons4" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(8, 96)
+rotation = 0.785397
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons5" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(24, 104)
+rotation = 1.57079
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons6" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(16, 96)
+rotation = 0.785397
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons7" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(32, 104)
+rotation = 1.0472
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons8" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(224, 0)
+rotation = 1.0472
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons9" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(256, 0)
+rotation = 1.83259
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 1
+
+[node name="Weapons10" type="Sprite2D" parent="WeaponPile"]
+z_index = 1
+position = Vector2(224, 96)
+rotation = -1.0472
+texture = ExtResource("6_rr1f2")
+hframes = 4
+frame = 2
+
+[node name="LightGroup" type="Node" parent="."]
+
+[node name="LightParticles1" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(24, -25)
+
+[node name="LightParticles2" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(24, 103)
+
+[node name="LightParticles3" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(72, -25)
+
+[node name="LightParticles4" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(72, 103)
+
+[node name="LightParticles5" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(120, -25)
+
+[node name="LightParticles6" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(120, 103)
+
+[node name="LightParticles7" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(168, -25)
+
+[node name="LightParticles8" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(168, 103)
+
+[node name="LightParticles9" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(216, -25)
+
+[node name="LightParticles10" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(216, 103)
+
+[node name="LightParticles11" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(264, -25)
+
+[node name="LightParticles12" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(264, 103)
+
+[node name="LightParticles13" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(312, -25)
+
+[node name="LightParticles14" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(312, 103)
+
+[node name="LightParticles15" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(360, -25)
+
+[node name="LightParticles16" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(360, 103)
+
+[node name="LightParticles17" parent="LightGroup" instance=ExtResource("5_a7frv")]
+position = Vector2(408, 103)

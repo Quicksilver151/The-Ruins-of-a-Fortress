@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3 uid="uid://ggb338ow7xr2"]
+
+[ext_resource type="Texture2D" uid="uid://i2a4knc13cbk" path="res://Assets/Sprites/Tiles.png" id="1_m2eer"]
+[ext_resource type="Texture2D" uid="uid://qtdro37bgfx3" path="res://Assets/Sprites/Decor.png" id="2_p6wj6"]
+[ext_resource type="Texture2D" uid="uid://7kbaupt4ldrp" path="res://Assets/Sprites/InternalDecor.png" id="3_iklmg"]
+[ext_resource type="Texture2D" uid="uid://esqywxlxqj8f" path="res://Assets/Sprites/logos.png" id="4_rv37y"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_hoihf"]
+tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 1, 1, 65537, 0, 65537, 65537, 1)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_wixmj"]
+tile_data = PackedInt32Array(0, 131073, 0, 65536, 131073, 1, 1, 196609, 0, 65537, 196609, 1)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_v17bw"]
+tile_data = PackedInt32Array(65536, 262145, 1, 131072, 262145, 1, 1, 262145, 0, 65537, 327681, 0, 131073, 327681, 1, 65538, 262145, 1, 131074, 262145, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esx47"]
+texture = ExtResource("1_m2eer")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/next_alternative_id = 2
+4:0/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_perqs"]
+texture = ExtResource("2_p6wj6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+7:0/0/probability = 0.2
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:1/0/probability = 0.2
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5fbjv"]
+texture = ExtResource("3_iklmg")
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0, 0, 0, 1)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/next_alternative_id = 4
+9:0/0 = 0
+9:0/1 = 1
+9:0/1/flip_h = true
+9:0/2 = 2
+9:0/2/transpose = true
+9:0/3 = 3
+9:0/3/flip_v = true
+9:0/3/transpose = true
+0:1/next_alternative_id = 2
+0:1/0 = 0
+0:1/1 = 1
+0:1/1/modulate = Color(0, 0, 0, 1)
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/next_alternative_id = 2
+6:1/0 = 0
+6:1/1 = 1
+6:1/1/flip_v = true
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+13:0/0 = 0
+12:0/0 = 0
+11:1/0 = 0
+10:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2krub"]
+texture = ExtResource("4_rv37y")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_358uo"]
+sources/0 = SubResource("TileSetAtlasSource_esx47")
+sources/1 = SubResource("TileSetAtlasSource_perqs")
+sources/2 = SubResource("TileSetAtlasSource_5fbjv")
+sources/3 = SubResource("TileSetAtlasSource_2krub")
+pattern_0 = SubResource("TileMapPattern_hoihf")
+pattern_1 = SubResource("TileMapPattern_wixmj")
+pattern_2 = SubResource("TileMapPattern_v17bw")
+
+[node name="tiles" type="TileMap"]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_358uo")
+format = 2
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = ""
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = true
+layer_2/y_sort_origin = 0
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()

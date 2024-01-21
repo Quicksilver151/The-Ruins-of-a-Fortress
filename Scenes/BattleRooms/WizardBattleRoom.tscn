@@ -1,0 +1,396 @@
+[gd_scene load_steps=30 format=3 uid="uid://dfg718kbc6cy3"]
+
+[ext_resource type="PackedScene" uid="uid://cyklmf3uvcp3a" path="res://Scenes/BattleRooms/BattleRoom.tscn" id="1_cykkw"]
+[ext_resource type="Texture2D" uid="uid://bakq762v24l6d" path="res://Assets/Sprites/Characters.png" id="2_ax5lj"]
+[ext_resource type="Script" path="res://Code/Wizard.gd" id="2_i6feu"]
+[ext_resource type="PackedScene" uid="uid://dmn2hmo8riak7" path="res://Objects/Enemy.tscn" id="2_k4vpe"]
+[ext_resource type="Script" path="res://Code/EnemySpawner.gd" id="2_tbnsh"]
+[ext_resource type="Texture2D" uid="uid://dbys7q8ktks1v" path="res://Assets/Sprites/CharactersBackwards.png" id="4_dmwp7"]
+[ext_resource type="Texture2D" uid="uid://d132yjh3rpfj0" path="res://Assets/Sprites/Weapons.png" id="4_lwhd2"]
+[ext_resource type="Texture2D" uid="uid://b2d8h4twa6wr1" path="res://Assets/Sprites/Attacks.png" id="6_773ra"]
+[ext_resource type="PackedScene" uid="uid://bx4h2knxtwkch" path="res://Objects/LightParticles.tscn" id="6_p220b"]
+[ext_resource type="Script" path="res://Code/Classes/AudioScatter2D.gd" id="10_0sscg"]
+[ext_resource type="AudioStream" uid="uid://rkklri4c0vw4" path="res://Assets/Audio/footsteps/footstep04.ogg" id="11_pmax3"]
+[ext_resource type="AudioStream" uid="uid://luakpjv8i2hu" path="res://Assets/Audio/footsteps/footstep05.ogg" id="12_7ley4"]
+[ext_resource type="AudioStream" uid="uid://bmlga5ucjmv0u" path="res://Assets/Audio/footsteps/footstep06.ogg" id="13_dh8sr"]
+[ext_resource type="AudioStream" uid="uid://dvcxokrt7vrpd" path="res://Assets/Audio/footsteps/drawKnife1.ogg" id="14_02c4q"]
+[ext_resource type="AudioStream" uid="uid://dqv3vby7mg12m" path="res://Assets/Audio/footsteps/drawKnife2.ogg" id="15_f1hs4"]
+[ext_resource type="Script" path="res://Code/Classes/LevelChangeArea2D.gd" id="16_r3p5f"]
+[ext_resource type="AudioStream" uid="uid://dwy5bdxabj3sr" path="res://Assets/Audio/forest.ogg" id="17_woirb"]
+
+[sub_resource type="GDScript" id="GDScript_hwmjd"]
+script/source = "extends Node2D
+func rescale():
+	SceneManager.scale_screen(0.5)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjrp6"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gonqq"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ej2h5"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vtx4"]
+
+[sub_resource type="Animation" id="Animation_0m6dp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:show_behind_parent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ttvp2"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(-12, -12), Vector2(-16, 0), Vector2(-8, 12), Vector2(0, 16), Vector2(8, 12), Vector2(16, 1.90735e-06), Vector2(12, -12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:show_behind_parent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7w1sy"]
+_data = {
+"RESET": SubResource("Animation_0m6dp"),
+"idle": SubResource("Animation_ttvp2")
+}
+
+[sub_resource type="Animation" id="Animation_f6q6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelChangeArea2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/Weapon:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hauxx"]
+resource_name = "new_animation"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 6.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 412)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelChangeArea2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/Weapon:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 6.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"rescale"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvj3x"]
+_data = {
+"RESET": SubResource("Animation_f6q6p"),
+"new_animation": SubResource("Animation_hauxx")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6khr"]
+radius = 16.0
+
+[node name="WizardBattleRoom" type="Node2D"]
+script = SubResource("GDScript_hwmjd")
+
+[node name="BattleRoom" parent="." instance=ExtResource("1_cykkw")]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+visible = false
+z_index = 1
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("2_i6feu")
+metadata/_edit_group_ = true
+
+[node name="AttackFX" type="Sprite2D" parent="Player"]
+modulate = Color(1, 1, 1, 0.109804)
+position = Vector2(-13, 1)
+texture = ExtResource("6_773ra")
+hframes = 5
+metadata/_edit_group_ = true
+
+[node name="Attacks4" type="Sprite2D" parent="Player/AttackFX"]
+position = Vector2(24, 0)
+rotation = -1.57079
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="Attacks2" type="Sprite2D" parent="Player/AttackFX"]
+position = Vector2(0, -24)
+rotation = 1.57079
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="Attacks3" type="Sprite2D" parent="Player/AttackFX"]
+position = Vector2(24, -24)
+rotation = 3.14159
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="ManualAttackArea" type="Area2D" parent="Player"]
+position = Vector2(0, -4)
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/ManualAttackArea"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_hjrp6")
+
+[node name="Characters" type="Sprite2D" parent="Player"]
+position = Vector2(0, -16)
+texture = ExtResource("2_ax5lj")
+hframes = 4
+
+[node name="CharactersBack" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(0, -16)
+texture = ExtResource("4_dmwp7")
+hframes = 4
+
+[node name="Weapon" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(-8, -16)
+texture = ExtResource("4_lwhd2")
+hframes = 4
+
+[node name="AttackArea" type="Area2D" parent="Player/Weapon"]
+position = Vector2(-4, -12)
+collision_layer = 8
+collision_mask = 8
+
+[node name="attackvfx" type="Node2D" parent="Player/Weapon/AttackArea"]
+visible = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(-16, -20)
+rotation = 1.57079
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(-16, 20)
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="Sprite2D3" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(24, 20)
+rotation = -1.57079
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="Sprite2D4" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(24, -20)
+rotation = -3.14159
+texture = ExtResource("6_773ra")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Weapon/AttackArea"]
+shape = SubResource("CircleShape2D_gonqq")
+
+[node name="LightParticles" parent="Player/Weapon" instance=ExtResource("6_p220b")]
+y_sort_enabled = true
+position = Vector2(-5, -10)
+
+[node name="LevelCamera" type="Camera2D" parent="Player"]
+limit_left = -256
+limit_top = -64
+limit_right = 256
+limit_bottom = 512
+editor_draw_limits = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_ej2h5")
+
+[node name="Hitbox" type="Area2D" parent="Player"]
+position = Vector2(0, -8)
+collision_layer = 8
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Hitbox"]
+shape = SubResource("CircleShape2D_3vtx4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_7w1sy")
+}
+
+[node name="EnemySpawner" type="Polygon2D" parent="."]
+position = Vector2(0, 552)
+color = Color(0.552941, 0.552941, 0.552941, 0.501961)
+polygon = PackedVector2Array(-88, 8, -72, 0, -56, 0, -40, 0, -24, 0, -8, 0, 8, 0, 24, 0, 40, 0, 56, 0, 72, 0, 88, 8)
+script = ExtResource("2_tbnsh")
+enemy_packed_scene = ExtResource("2_k4vpe")
+
+[node name="AudioScatter2D" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(-97, -9)
+script = ExtResource("10_0sscg")
+instance_count = 16
+sounds = Array[AudioStream]([ExtResource("11_pmax3"), ExtResource("12_7ley4"), ExtResource("13_dh8sr"), ExtResource("14_02c4q"), ExtResource("15_f1hs4")])
+
+[node name="Marker2D" type="Marker2D" parent="EnemySpawner/AudioScatter2D"]
+position = Vector2(192, -84)
+
+[node name="Cutscene" type="AnimationPlayer" parent="."]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_vvj3x")
+}
+
+[node name="LevelChangeArea2D" type="Area2D" parent="."]
+monitoring = false
+script = ExtResource("16_r3p5f")
+scene_name = "CharacterSelect"
+fade_to_white = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelChangeArea2D"]
+shape = SubResource("CircleShape2D_r6khr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_woirb")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="body_entered" from="Player/ManualAttackArea" to="Player" method="_on_manual_attack_area_body_entered"]
+[connection signal="body_entered" from="Player/Weapon/AttackArea" to="Player" method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_body_entered"]

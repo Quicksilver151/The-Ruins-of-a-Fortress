@@ -1,0 +1,159 @@
+[gd_scene load_steps=16 format=3 uid="uid://c0p62366ajdk"]
+
+[ext_resource type="PackedScene" uid="uid://cyklmf3uvcp3a" path="res://Scenes/BattleRooms/BattleRoom.tscn" id="1_7fjjt"]
+[ext_resource type="Script" path="res://Code/Knight.gd" id="2_o6264"]
+[ext_resource type="Texture2D" uid="uid://b2d8h4twa6wr1" path="res://Assets/Sprites/Attacks.png" id="3_vfp8b"]
+[ext_resource type="Texture2D" uid="uid://bakq762v24l6d" path="res://Assets/Sprites/Characters.png" id="4_v1q1f"]
+[ext_resource type="Texture2D" uid="uid://dbys7q8ktks1v" path="res://Assets/Sprites/CharactersBackwards.png" id="5_cfxhx"]
+[ext_resource type="Texture2D" uid="uid://d132yjh3rpfj0" path="res://Assets/Sprites/Weapons.png" id="6_3c8w6"]
+[ext_resource type="PackedScene" uid="uid://bx4h2knxtwkch" path="res://Objects/LightParticles.tscn" id="7_kk25n"]
+[ext_resource type="AudioStream" uid="uid://dwy5bdxabj3sr" path="res://Assets/Audio/forest.ogg" id="8_m3oo3"]
+[ext_resource type="Script" path="res://Code/Classes/LevelChangeArea2D.gd" id="9_x4xhb"]
+
+[sub_resource type="GDScript" id="GDScript_cxy68"]
+script/source = "extends Node2D
+func _ready():
+	SceneManager.scale_screen(0.5)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru3pw"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ukjfs"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7p1n"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dibey"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yi7y8"]
+radius = 16.0
+
+[node name="KnightBattleRoom" type="Node2D"]
+script = SubResource("GDScript_cxy68")
+
+[node name="BattleRoom" parent="." instance=ExtResource("1_7fjjt")]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+z_index = 1
+position = Vector2(0, 412)
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("2_o6264")
+
+[node name="AttackFX" type="Sprite2D" parent="Player"]
+modulate = Color(1, 1, 1, 0.109804)
+position = Vector2(0, 4)
+texture = ExtResource("3_vfp8b")
+hframes = 5
+frame = 2
+metadata/_edit_group_ = true
+
+[node name="ManualAttackArea" type="Area2D" parent="Player"]
+position = Vector2(0, -4)
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/ManualAttackArea"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_ru3pw")
+
+[node name="Characters" type="Sprite2D" parent="Player"]
+position = Vector2(0, -16)
+texture = ExtResource("4_v1q1f")
+hframes = 4
+frame = 2
+
+[node name="CharactersBack" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(0, -16)
+texture = ExtResource("5_cfxhx")
+hframes = 4
+frame = 2
+
+[node name="Weapon" type="Sprite2D" parent="Player"]
+position = Vector2(-12, -21)
+rotation = -0.523598
+texture = ExtResource("6_3c8w6")
+hframes = 4
+frame = 2
+
+[node name="AttackArea" type="Area2D" parent="Player/Weapon"]
+position = Vector2(-4, -12)
+collision_layer = 8
+collision_mask = 8
+
+[node name="attackvfx" type="Node2D" parent="Player/Weapon/AttackArea"]
+visible = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(-16, -20)
+rotation = 1.57079
+texture = ExtResource("3_vfp8b")
+hframes = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(-16, 20)
+texture = ExtResource("3_vfp8b")
+hframes = 5
+
+[node name="Sprite2D3" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(24, 20)
+rotation = -1.57079
+texture = ExtResource("3_vfp8b")
+hframes = 5
+
+[node name="Sprite2D4" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
+position = Vector2(24, -20)
+rotation = -3.14159
+texture = ExtResource("3_vfp8b")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Weapon/AttackArea"]
+shape = SubResource("CircleShape2D_ukjfs")
+
+[node name="LightParticles" parent="Player/Weapon" instance=ExtResource("7_kk25n")]
+y_sort_enabled = true
+position = Vector2(0.830124, 8.56216)
+
+[node name="LevelCamera" type="Camera2D" parent="Player"]
+limit_left = -256
+limit_top = -64
+limit_right = 256
+limit_bottom = 512
+editor_draw_limits = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_x7p1n")
+
+[node name="Hitbox" type="Area2D" parent="Player"]
+position = Vector2(0, -8)
+collision_layer = 8
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Hitbox"]
+shape = SubResource("CircleShape2D_dibey")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_m3oo3")
+volume_db = -10.0
+autoplay = true
+
+[node name="LevelChangeArea2D" type="Area2D" parent="."]
+script = ExtResource("9_x4xhb")
+scene_name = "CharacterSelect"
+fade_to_white = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelChangeArea2D"]
+shape = SubResource("CircleShape2D_yi7y8")
+
+[connection signal="body_entered" from="Player/ManualAttackArea" to="Player" method="_on_manual_attack_area_body_entered"]
+[connection signal="body_entered" from="Player/Weapon/AttackArea" to="Player" method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_body_entered"]

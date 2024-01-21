@@ -1,0 +1,28 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://ctc7ypa2kl5q8"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_goxjc"]
+resource_name = "Reverb"
+room_size = 1.0
+damping = 0.2
+spread = 0.46
+hipass = 0.62
+dry = 0.53
+wet = 0.78
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_n7oym"]
+resource_name = "Filter"
+resonance = 0.55
+gain = 2.56
+
+[resource]
+bus/0/volume_db = -5.32994
+bus/1/name = &"echo"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 4.43349
+bus/1/send = &"echo 2"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_goxjc")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectFilter_n7oym")
+bus/1/effect/1/enabled = false

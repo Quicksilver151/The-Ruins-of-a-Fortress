@@ -1,0 +1,122 @@
+[gd_scene load_steps=15 format=3 uid="uid://baixkel10x28e"]
+
+[ext_resource type="Texture2D" uid="uid://l4gk6sodesep" path="res://Assets/Sprites/wall_normal.png" id="1_bmax0"]
+[ext_resource type="Texture2D" uid="uid://cmpjra0w1v6k0" path="res://Assets/Sprites/JamSplash/65-Overload.png" id="1_wir0v"]
+[ext_resource type="Texture2D" uid="uid://dkvopgp8g0ltr" path="res://Assets/Sprites/JamSplash/good-end.png" id="2_h8b2w"]
+[ext_resource type="Texture2D" uid="uid://cpg8i117f5r4q" path="res://Assets/Sprites/JamSplash/pick-fighter.png" id="3_xj1et"]
+[ext_resource type="Texture2D" uid="uid://phhlo7su7qpf" path="res://Assets/Sprites/JamSplash/unspoken-story.png" id="4_3jgfu"]
+
+[sub_resource type="GDScript" id="GDScript_xhyve"]
+script/source = "extends MarginContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	SceneManager.scale_screen(0.5)
+
+func _input(event):
+	if event.is_action_pressed(\"ui_cancel\"):
+		SceneManager.change_scene()
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hci7y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlmvu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3grb5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3ocq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8kao1"]
+
+[sub_resource type="Theme" id="Theme_wwrq7"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_hci7y")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_jlmvu")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_3grb5")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_d3ocq")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_8kao1")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j12yv"]
+
+[sub_resource type="GDScript" id="GDScript_vt5o3"]
+script/source = "extends ScrollContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	
+	scroll_vertical = get_global_mouse_position().y / get_viewport_rect().size.y * get_v_scroll_bar().max_value / 2
+"
+
+[node name="About" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_xhyve")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_bmax0")
+stretch_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+theme = SubResource("Theme_wwrq7")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_j12yv")
+scroll_vertical = 93
+script = SubResource("GDScript_vt5o3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "This game was mad as a part of godot wild jam #65 for the following theme"
+autowrap_mode = 2
+
+[node name="65-overload" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_wir0v")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "This game contains all of the following wildcards"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="1" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_h8b2w")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_xj1et")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="3" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_3jgfu")
+expand_mode = 5
+stretch_mode = 5

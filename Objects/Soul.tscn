@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwubt56wnkj06"]
+
+[ext_resource type="Script" path="res://Code/Player.gd" id="1_gflrd"]
+[ext_resource type="Texture2D" uid="uid://dxr0xnj1mlgxp" path="res://Assets/Sprites/Player.png" id="1_xnl11"]
+
+[sub_resource type="Gradient" id="Gradient_y6s2t"]
+colors = PackedColorArray(0.411747, 0.411747, 0.411747, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qyund"]
+gradient = SubResource("Gradient_y6s2t")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_w8t1h"]
+offsets = PackedFloat32Array(0, 0.1, 1)
+colors = PackedColorArray(0.207207, 0.207207, 0.207207, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cqite"]
+gradient = SubResource("Gradient_w8t1h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mdnj0"]
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 25.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+color = Color(0.960784, 0.960784, 0.960784, 1)
+color_ramp = SubResource("GradientTexture1D_cqite")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gmxsm"]
+radius = 2.0
+
+[node name="Soul" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_gflrd")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_qyund")
+
+[node name="SoulSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.57079
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_xnl11")
+
+[node name="Soullight" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.396078)
+position = Vector2(2.32831e-10, 1)
+rotation = 1.57079
+scale = Vector2(0.4, 0.5)
+texture = ExtResource("1_xnl11")
+
+[node name="Soullight2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+rotation = 1.57079
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_xnl11")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -5)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_mdnj0")
+lifetime = 0.2
+speed_scale = 0.16
+local_coords = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gmxsm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.4
+drag_top_margin = 0.4
+drag_right_margin = 0.4
+drag_bottom_margin = 0.4
+editor_draw_drag_margin = true

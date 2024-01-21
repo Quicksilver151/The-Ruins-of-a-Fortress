@@ -1,0 +1,157 @@
+[gd_scene load_steps=15 format=3 uid="uid://hmx48qotelcb"]
+
+[ext_resource type="Script" path="res://Code/SceneManager.gd" id="1_4q8d3"]
+[ext_resource type="Shader" path="res://Assets/Shaders/ColorPaletteSwitcher.gdshader" id="2_aj0pr"]
+[ext_resource type="Texture2D" uid="uid://ihsmous1lrej" path="res://icon.svg" id="2_en5rr"]
+[ext_resource type="Texture2D" uid="uid://dueagpadxg7qt" path="res://Screenshot_20240113_210411.png" id="4_it7xd"]
+[ext_resource type="Texture2D" uid="uid://esqywxlxqj8f" path="res://Assets/Sprites/logos.png" id="4_qr4bv"]
+
+[sub_resource type="Gradient" id="Gradient_1iew4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.171717, 0.333333, 0.888889)
+colors = PackedColorArray(0, 0, 0, 1, 0.227451, 0.196078, 0.466667, 1, 0.403922, 0.447059, 0.662745, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g4yns"]
+gradient = SubResource("Gradient_1iew4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rlpl"]
+shader = ExtResource("2_aj0pr")
+shader_parameter/speed_scale = 0.0
+shader_parameter/palette = 1.0
+shader_parameter/palette_number = 1.0
+shader_parameter/gradient = SubResource("GradientTexture1D_g4yns")
+
+[sub_resource type="Animation" id="Animation_86td8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2dquu"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_767pv"]
+resource_name = "fade_from_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bglnl"]
+resource_name = "fade_from_white"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.329412, 0.329412, 0.329412, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v8165"]
+resource_name = "fade_to_white"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1f8yb"]
+_data = {
+"RESET": SubResource("Animation_86td8"),
+"fade_from_black": SubResource("Animation_767pv"),
+"fade_from_white": SubResource("Animation_bglnl"),
+"fade_to_black": SubResource("Animation_2dquu"),
+"fade_to_white": SubResource("Animation_v8165")
+}
+
+[node name="SceneManager" type="CanvasLayer" node_paths=PackedStringArray("ScreenFadePlayer")]
+script = ExtResource("1_4q8d3")
+ScreenFadePlayer = NodePath("AnimationPlayer")
+
+[node name="filtertestlayer" type="Node2D" parent="."]
+visible = false
+
+[node name="Logos2" type="Sprite2D" parent="filtertestlayer"]
+position = Vector2(128, 16)
+texture = ExtResource("4_qr4bv")
+
+[node name="Icon" type="Sprite2D" parent="filtertestlayer"]
+position = Vector2(40, 64)
+scale = Vector2(0.46875, 0.4375)
+texture = ExtResource("2_en5rr")
+
+[node name="Logos" type="Sprite2D" parent="filtertestlayer"]
+position = Vector2(144, 80)
+scale = Vector2(0.0689815, 0.0694444)
+texture = ExtResource("4_it7xd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Transition" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="darkeningthingsupforthefloatingpointerrors" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.0196078)
+
+[node name="Filter" type="ColorRect" parent="MarginContainer"]
+material = SubResource("ShaderMaterial_3rlpl")
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1f8yb")
+}
