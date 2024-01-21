@@ -27,7 +27,10 @@ func _ready():
 
 var speed = 30;
 func _physics_process(_delta):
-	if health <= 0: queue_free();
+	if health <= 0:
+		# AP.play_sound("enemy_hurt");
+		await get_tree().process_frame
+		queue_free();
 	queue_redraw()
 	# health -= delta;
 	if player == null: return;

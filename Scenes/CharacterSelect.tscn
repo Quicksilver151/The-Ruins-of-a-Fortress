@@ -16,10 +16,16 @@ func _ready():
 	$WizardHider/StaticPolygon2D.visible = Global.room_completed.wizard
 	$KnightHider.visible = Global.room_completed.knight
 	$KnightHider/StaticPolygon2D.visible = Global.room_completed.knight
-	$KingHider.visible = Global.room_completed.king
-	$KingHider/StaticPolygon2D.visible = Global.room_completed.king
+	
+	if Global.room_completed.knight && Global.room_completed.wizard:
+		$KingHider.visible = false
+		$KingHider/StaticPolygon2D.visible = false
+	
 	await get_tree().create_timer(1).timeout
 	SceneManager.scale_screen(1.0)
+	
+	
+	
 
 
 
@@ -111,6 +117,16 @@ scene_name = "Rooms/WizardRoom"
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelChangeArea2D"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_601ax")
+
+[node name="LevelChangeArea2D4" type="Area2D" parent="."]
+position = Vector2(120, -128)
+script = ExtResource("4_3d0r8")
+scene_name = "Rooms/ThroneRoom"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelChangeArea2D4"]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_601ax")
 

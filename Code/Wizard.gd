@@ -46,8 +46,10 @@ func _on_hitbox_body_entered(body):
 
 
 func _on_attack_area_body_entered(body):
+	AP.play_sound("hit")
 	body.health -= 2
 
 
 func _on_manual_attack_area_body_entered(body):
+	AP.play_sound("hit")
 	body.health -= 5

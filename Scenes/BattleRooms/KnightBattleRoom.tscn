@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0p62366ajdk"]
+[gd_scene load_steps=29 format=3 uid="uid://c0p62366ajdk"]
 
 [ext_resource type="PackedScene" uid="uid://cyklmf3uvcp3a" path="res://Scenes/BattleRooms/BattleRoom.tscn" id="1_7fjjt"]
 [ext_resource type="Script" path="res://Code/Knight.gd" id="2_o6264"]
@@ -9,35 +9,224 @@
 [ext_resource type="PackedScene" uid="uid://bx4h2knxtwkch" path="res://Objects/LightParticles.tscn" id="7_kk25n"]
 [ext_resource type="AudioStream" uid="uid://dwy5bdxabj3sr" path="res://Assets/Audio/forest.ogg" id="8_m3oo3"]
 [ext_resource type="Script" path="res://Code/Classes/LevelChangeArea2D.gd" id="9_x4xhb"]
+[ext_resource type="Script" path="res://Code/EnemySpawner.gd" id="10_3wkus"]
+[ext_resource type="PackedScene" uid="uid://dmn2hmo8riak7" path="res://Objects/Enemy.tscn" id="11_jpl5f"]
+[ext_resource type="Script" path="res://Code/Classes/AudioScatter2D.gd" id="12_pcyhf"]
+[ext_resource type="AudioStream" uid="uid://rkklri4c0vw4" path="res://Assets/Audio/footsteps/footstep04.ogg" id="13_fow0y"]
+[ext_resource type="AudioStream" uid="uid://luakpjv8i2hu" path="res://Assets/Audio/footsteps/footstep05.ogg" id="14_xnpmk"]
+[ext_resource type="AudioStream" uid="uid://bmlga5ucjmv0u" path="res://Assets/Audio/footsteps/footstep06.ogg" id="15_jp5ha"]
+[ext_resource type="AudioStream" uid="uid://dvcxokrt7vrpd" path="res://Assets/Audio/footsteps/drawKnife1.ogg" id="16_iepg8"]
+[ext_resource type="AudioStream" uid="uid://dqv3vby7mg12m" path="res://Assets/Audio/footsteps/drawKnife2.ogg" id="17_rjerv"]
 
-[sub_resource type="GDScript" id="GDScript_cxy68"]
+[sub_resource type="GDScript" id="GDScript_f687u"]
 script/source = "extends Node2D
-func _ready():
+func rescale():
 	SceneManager.scale_screen(0.5)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ru3pw"]
-radius = 28.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ukjfs"]
-radius = 24.0
+radius = 20.3961
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7p1n"]
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dibey"]
 
+[sub_resource type="Animation" id="Animation_dktay"]
+resource_name = "slash"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-12, -21), Vector2(4, 0), Vector2(-16, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.523598, -3.92699, -2.09439]
+}
+
+[sub_resource type="Animation" id="Animation_dkv41"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523598]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aa80m"]
+_data = {
+"RESET": SubResource("Animation_dkv41"),
+"slash": SubResource("Animation_dktay")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_yi7y8"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_f6q6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelChangeArea2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/Weapon:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hauxx"]
+resource_name = "new_animation"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 6.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 412)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelChangeArea2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player/Weapon:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 6.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"rescale"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvj3x"]
+_data = {
+"RESET": SubResource("Animation_f6q6p"),
+"new_animation": SubResource("Animation_hauxx")
+}
+
 [node name="KnightBattleRoom" type="Node2D"]
-script = SubResource("GDScript_cxy68")
+script = SubResource("GDScript_f687u")
 
 [node name="BattleRoom" parent="." instance=ExtResource("1_7fjjt")]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+visible = false
 z_index = 1
-position = Vector2(0, 412)
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -52,7 +241,7 @@ frame = 2
 metadata/_edit_group_ = true
 
 [node name="ManualAttackArea" type="Area2D" parent="Player"]
-position = Vector2(0, -4)
+position = Vector2(0, 8)
 collision_layer = 8
 collision_mask = 8
 monitoring = false
@@ -76,45 +265,12 @@ hframes = 4
 frame = 2
 
 [node name="Weapon" type="Sprite2D" parent="Player"]
+visible = false
 position = Vector2(-12, -21)
 rotation = -0.523598
 texture = ExtResource("6_3c8w6")
 hframes = 4
 frame = 2
-
-[node name="AttackArea" type="Area2D" parent="Player/Weapon"]
-position = Vector2(-4, -12)
-collision_layer = 8
-collision_mask = 8
-
-[node name="attackvfx" type="Node2D" parent="Player/Weapon/AttackArea"]
-visible = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
-position = Vector2(-16, -20)
-rotation = 1.57079
-texture = ExtResource("3_vfp8b")
-hframes = 5
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
-position = Vector2(-16, 20)
-texture = ExtResource("3_vfp8b")
-hframes = 5
-
-[node name="Sprite2D3" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
-position = Vector2(24, 20)
-rotation = -1.57079
-texture = ExtResource("3_vfp8b")
-hframes = 5
-
-[node name="Sprite2D4" type="Sprite2D" parent="Player/Weapon/AttackArea/attackvfx"]
-position = Vector2(24, -20)
-rotation = -3.14159
-texture = ExtResource("3_vfp8b")
-hframes = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Weapon/AttackArea"]
-shape = SubResource("CircleShape2D_ukjfs")
 
 [node name="LightParticles" parent="Player/Weapon" instance=ExtResource("7_kk25n")]
 y_sort_enabled = true
@@ -140,12 +296,18 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Hitbox"]
 shape = SubResource("CircleShape2D_dibey")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_aa80m")
+}
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_m3oo3")
 volume_db = -10.0
 autoplay = true
 
 [node name="LevelChangeArea2D" type="Area2D" parent="."]
+monitoring = false
 script = ExtResource("9_x4xhb")
 scene_name = "CharacterSelect"
 fade_to_white = true
@@ -154,6 +316,27 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelChangeArea2D"]
 shape = SubResource("CircleShape2D_yi7y8")
 
+[node name="EnemySpawner" type="Polygon2D" parent="."]
+position = Vector2(0, 552)
+color = Color(0.552941, 0.552941, 0.552941, 0.501961)
+polygon = PackedVector2Array(-88, 8, -72, 0, -56, 0, -40, 0, -24, 0, -8, 0, 8, 0, 24, 0, 40, 0, 56, 0, 72, 0, 88, 8)
+script = ExtResource("10_3wkus")
+enemy_packed_scene = ExtResource("11_jpl5f")
+
+[node name="AudioScatter2D" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(-97, -9)
+script = ExtResource("12_pcyhf")
+instance_count = 16
+sounds = Array[AudioStream]([ExtResource("13_fow0y"), ExtResource("14_xnpmk"), ExtResource("15_jp5ha"), ExtResource("16_iepg8"), ExtResource("17_rjerv")])
+
+[node name="Marker2D" type="Marker2D" parent="EnemySpawner/AudioScatter2D"]
+position = Vector2(192, -84)
+
+[node name="Cutscene" type="AnimationPlayer" parent="."]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_vvj3x")
+}
+
 [connection signal="body_entered" from="Player/ManualAttackArea" to="Player" method="_on_manual_attack_area_body_entered"]
-[connection signal="body_entered" from="Player/Weapon/AttackArea" to="Player" method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_body_entered"]

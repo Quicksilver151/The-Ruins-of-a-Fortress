@@ -25,8 +25,8 @@ func _unhandled_input(event):
 		
 		$AttackFX.modulate = Color.WHITE
 		$AttackFX.modulate.a = 0
-		await get_tree().create_timer(0.2).timeout
-		AP.play_sound("wizard_area")
+		AP.play_sound("slash")
+		$AnimationPlayer.play("slash")
 		await get_tree().create_timer(0.8).timeout
 		$AttackFX.modulate = Color.BLACK
 
@@ -36,4 +36,15 @@ func _unhandled_input(event):
 func _draw():
 	draw_line(Vector2(-10,-33), Vector2(10,-33), Color.BLACK, 1, false);
 	draw_line(Vector2(-10,-33), Vector2((health/3.0) - 10, -33), Color.WHITE, 1, false);
+
+func _on_manual_attack_area_body_entered(body):
+	AP.play_sound("hit")
+	body.health -= 7
+
+
+func _on_hitbox_body_entered(body):
+	var direction = (body.global_position - global_position).normalized();
+	position -= direction * 10;
+	health -= 3
+	AP.play_sound("hurt")
 
